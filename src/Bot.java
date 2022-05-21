@@ -140,40 +140,41 @@ public class Bot {
         // cek horizontal;
         if(!this.board.isPositionFull(position)){
             if (col + 2 < 7) {
-                if (this.board.getBoard(row, col + 1) == this.token_player
-                        && this.board.getBoard(row, col + 2) == this.token_player) {
+                if (this.board.getBoard(row, col + 1) == this.token_bot
+                        && this.board.getBoard(row, col + 2) == this.token_bot) {
                     this.cost[col][0] += 1;
                 }
                 if (row - 2 >= 0) {
-                    if (this.board.getBoard(row - 1, col + 1) == this.token_player
-                            && this.board.getBoard(row - 2, col + 2) == this.token_player) {
+                    if (this.board.getBoard(row - 1, col + 1) == this.token_bot
+                            && this.board.getBoard(row - 2, col + 2) == this.token_bot) {
                         this.cost[col][0] += 1;
                     }
                 }
 
                 if (row + 2 < 6) {
-                    if (this.board.getBoard(row + 1, col + 1) == this.token_player
-                            && this.board.getBoard(row + 2, col + 2) == this.token_player) {
+                    if (this.board.getBoard(row + 1, col + 1) == this.token_bot
+                            && this.board.getBoard(row + 2, col + 2) == this.token_bot) {
                         this.cost[col][0] += 1;
                     }
                 }
 
             }
+
             if (col - 2 >= 0) {
-                if (this.board.getBoard(row, col - 1) == this.token_player
-                        && this.board.getBoard(row, col - 2) == this.token_player) {
+                if (this.board.getBoard(row, col - 1) == this.token_bot
+                        && this.board.getBoard(row, col - 2) == this.token_bot) {
                     this.cost[col][0] += 1;
                 }
                 if (row - 2 >= 0) {
-                    if (this.board.getBoard(row - 1, col - 1) == this.token_player
-                            && this.board.getBoard(row - 2, col - 2) == this.token_player) {
+                    if (this.board.getBoard(row - 1, col - 1) == this.token_bot
+                            && this.board.getBoard(row - 2, col - 2) == this.token_bot) {
                         this.cost[col][0] += 1;
                     }
                 }
 
                 if (row + 2 < 6) {
-                    if (this.board.getBoard(row + 1, col - 1) == this.token_player
-                            && this.board.getBoard(row + 2, col - 2) == this.token_player) {
+                    if (this.board.getBoard(row + 1, col - 1) == this.token_bot
+                            && this.board.getBoard(row + 2, col - 2) == this.token_bot) {
                         this.cost[col][0] += 1;
                     }
                 }
@@ -181,8 +182,26 @@ public class Bot {
 
             // cek vertikal
             if (row + 2 < 6) {
-                if (this.board.getBoard(row + 1, col) == this.token_player
-                        && this.board.getBoard(row + 2, col) == this.token_player) {
+                if (this.board.getBoard(row + 1, col) == this.token_bot
+                        && this.board.getBoard(row + 2, col) == this.token_bot) {
+                    this.cost[col][0] += 1;
+                }
+            }
+
+            if (row - 1 >= 0 && row + 1 < 6 && col - 1 >= 0 && col + 1 < 7) {
+                if (this.board.getBoard(row - 1, col - 1) == this.token_bot
+                        && this.board.getBoard(row + 1, col + 1) == this.token_bot) {
+                    this.cost[col][0] += 1;
+                }
+                if (this.board.getBoard(row - 1, col + 1) == this.token_bot
+                        && this.board.getBoard(row + 1, col - 1) == this.token_bot) {
+                    this.cost[col][0] += 1;
+                }
+            }
+
+            if (col - 1 >= 0 && col + 1 < 7) {
+                if (this.board.getBoard(row, col - 1) == this.token_bot
+                        && this.board.getBoard(row, col + 1) == this.token_bot) {
                     this.cost[col][0] += 1;
                 }
             }
@@ -219,16 +238,18 @@ public class Bot {
         for (int i = 1;i <=7; i++){
             if(!this.board.isPositionFull(i)){
                 if (connect3(i, this.token_bot)) {
+                    System.out.println("bot connect 3");
                     return i;
                 }
                 if (connect3(i, this.token_player)) {
+                    System.out.println("player connect 3");
                     return i;
                 }
             }
         }
         
         for (int i = 1; i <= 6; i++) {
-            if(!this.board.isPositionFull(i)){
+            if(!this.board.isPositionFull(i+1)){
                 if (token_player==1){
                     if (this.cost[i][1] > this.cost[idxmax][1]) {
                         idxmax = i;
@@ -265,20 +286,6 @@ public class Bot {
                 }
             }
         }
-
-        boolean allzero = true;
-        for (int i = 0; i <= 6; i++) {
-            if (this.cost[i][2] != 0) {
-                allzero = false;
-            }
-        }
-        if (allzero) {
-            for (int i = 1; i <=7; i++) {
-                if(!this.board.isPositionFull(i)){
-                    return i;
-                }
-            }
-        }
         return idxmax+1;
     }
 
@@ -291,3 +298,4 @@ public class Bot {
         }
     }
 }
+ 

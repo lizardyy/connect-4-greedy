@@ -29,15 +29,19 @@ public class Main {
                 while (!board.isValid(position) || board.isPositionFull(position)) {
                     System.out.println("Choose column to drop token: ");
                     position = scanner.nextInt();
-                    // position = ran.nextInt(100) % 7 + 1;
                 }
             }
             else{
                 position = bot.getMove();
                 bot.printCost();
-                //test
-                // System.out.println("Choose column to drop token: ");
-                // position = scanner.nextInt();
+                if(board.isPositionFull(position)){
+                    for (int i = 1;i<=7;i++){
+                        if (!board.isPositionFull(i)){
+                            position = i;
+                            break;
+                        }
+                    }
+                }
             }
             board.addToken(position, game.getTurn());
             board.printBoard();
