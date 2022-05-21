@@ -1,6 +1,8 @@
 # *Connect Four Bot* dengan Menggunakan Algoritma *Greedy*
 
 Game *Connect Four* berbasis CLI *(Comman Line Interface)*
+![image](https://user-images.githubusercontent.com/88304455/169664028-e264da5d-c68c-4af9-bd9b-c025bbd29d7a.png)
+
 
 ## Disusun Oleh
 
