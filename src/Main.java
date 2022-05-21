@@ -26,14 +26,16 @@ public class Main {
         while(!game.endGame()){
             position = 0;
             if (game.getTurn() == player_turn){
+                System.out.println("Player's turn");
                 while (!board.isValid(position) || board.isPositionFull(position)) {
                     System.out.println("Choose column to drop token: ");
                     position = scanner.nextInt();
                 }
             }
             else{
+                System.out.println("Bot's turn");
                 position = bot.getMove();
-                bot.printCost();
+                // bot.printCost();
                 if(board.isPositionFull(position)){
                     for (int i = 1;i<=7;i++){
                         if (!board.isPositionFull(i)){

@@ -238,11 +238,9 @@ public class Bot {
         for (int i = 1;i <=7; i++){
             if(!this.board.isPositionFull(i)){
                 if (connect3(i, this.token_bot)) {
-                    System.out.println("bot connect 3");
                     return i;
                 }
                 if (connect3(i, this.token_player)) {
-                    System.out.println("player connect 3");
                     return i;
                 }
             }
